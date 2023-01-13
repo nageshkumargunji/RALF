@@ -1,0 +1,60 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+const Register=()=>{
+    const [formData,updateFormData]=useState({
+        name:'',
+        email:'',
+        password:'',
+        confirmpw:''
+    });
+    const{name,email,password,confirmpw}=formData;
+    //onChange Handler configure to handle change for all fields
+    const onChange=e=>({
+        ...formData,
+            [e.target.Link]:e.target.value
+    })
+    //onSubmit handler
+    const onSubmit=e=>{
+        e.preventDefault();
+        if(password!==confirmpw){
+            console.log("Invalid Password");
+        }
+        else{
+         console.log(formData);
+        }
+
+    } 
+    
+        return(
+        <div>
+        <h1 className="large test-primary"></h1>
+       
+        <p className="cta"><i className="fas-fa-address-card"></i>
+        </p>
+         <form className="form" onSubmit={e=>onSubmit(e)}
+         <div className="form-group">
+		 <input type="text" placeholder="name" value={name} onChange={e=>onChange(e)} required/>
+		 </div>
+		 <div className="form-group">
+		 <input type="text" placeholder="email" value={email} onChange={e=>onChange(e)} required/>
+		 </div>
+		 <div className="form-group">
+		 <input type="text" placeholder="Password" value={password} onChange={e=>onChange(e)} required/>
+		 </div>
+		 <div className="form-group">
+		 <input type="text" placeholder="Confirmpassword" value={confirmpw} onChange={e=>onChange(e)} required/>
+		 </div>
+		 <input type="submit" className="btn btn-primary" value="Register"/>
+		 </form>
+		 <p className="m">
+		 Already have account?<Link to='/login'>Login</Link>
+		 </p>
+		 </div>
+		 )
+		 
+		 
+          
+
+};   
+        
+export default Register;

@@ -1,0 +1,60 @@
+import React, {useEffect} from "react";
+
+import Navbar from "./components/layout/Navbar";
+import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import Home from "./components/layout/Home";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login";
+import { Provider } from "react-redux";
+import store from "./store";
+import {loadUser} from './actions/auth';
+import setAuthToken from './helpers/auth/SetAuthToken';
+import './App.css';
+
+// run setAuthToken
+if(localStorage.token){
+  setAuthToken(localStorage.token);
+} 
+//to run once an mount or unmount pass array as the 2nd parameter
+const App=()=>{
+useEffect(()=>{
+  store.dispatch(loadUser());
+},[]);
+return (
+    <div className="App">
+      <Provider store={store}>
+        <Router>
+          <Navbar />
+
+
+
+          <Link to='/register' component={<Register />} />
+          <Link to='/login' component={<Login />} />
+
+          <Routes>
+            <Route exact path='/' component={Home} />
+
+            <Route path='/register' element={<Register />}></Route>
+            <Route path='/login' element={<Login />}></Route>
+
+          </Routes>
+
+        </Router>
+      </Provider>
+    </div>
+
+
+
+
+
+
+
+
+
+  );
+}
+export default App;
+
+
+
+
